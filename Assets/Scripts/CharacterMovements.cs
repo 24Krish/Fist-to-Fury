@@ -10,9 +10,11 @@ public class CharacterMovement : MonoBehaviour
     private float horizontal;
     private bool IsMoving;
     private float vertical;
+    private AnimationManager animationmanager;
     // Start is called before the first frame update
     void Start()
     {
+        animationmanager = GetComponent<AnimationManager>();    
          rigidbodyFighter = GetComponent<Rigidbody>();
     }
 
@@ -21,15 +23,19 @@ public class CharacterMovement : MonoBehaviour
     {
          horizontal = Input.GetAxis("P1LSLR");
         vertical = Input.GetAxis("P1LSUD");
-        Debug.Log(horizontal);
+        // Debug.Log(horizontal);
         if(horizontal < 0.1f && horizontal > -0.1f && vertical < 0.1f && vertical > -0.1f)
         {
-            Debug.Log("Stopped");
+            // Debug.Log("Stopped");
             IsMoving = false;
+            animationmanager.IsWalkingFalse();
         }
         else
         {
+            Vector3 DesiredVelocity = new Vector3(horizontal, 0, -vertical);
+            transform.rotation = Quaternion.LookRotation(DesiredVelocity);
             IsMoving = true;
+            animationmanager.IsWalkingTrue();
         }
     }
     private void FixedUpdate()
