@@ -10,21 +10,44 @@ public class CharacterMovement : MonoBehaviour
     private float horizontal;
     private bool IsMoving;
     private float vertical;
+    private float InputThreshold = 0.1f;
     private AnimationManager animationmanager;
+    public int PlayerNumber;
+    private BlockDetection Block;
     // Start is called before the first frame update
     void Start()
     {
         animationmanager = GetComponent<AnimationManager>();    
          rigidbodyFighter = GetComponent<Rigidbody>();
+        Block = GetComponent<BlockDetection>();
     }
 
     // Update is called once per frame
     void Update()
     {
-         horizontal = Input.GetAxis("P1LSLR");
-        vertical = Input.GetAxis("P1LSUD");
+        // Check each joystick axis for input
+        /*for (int joystickNumber = 1; joystickNumber <= 1; joystickNumber++) // Assuming up to 4 joysticks for simplicity
+        {
+            string horizontalAxisName = "Horizontal" + joystickNumber; // Your axis names might differ
+            string verticalAxisName = "Vertical" + joystickNumber; // Your axis names might differ
+
+            float moveHorizontal = Input.GetAxis(horizontalAxisName);
+            float moveVertical = Input.GetAxis(verticalAxisName);
+
+            if (Mathf.Abs(moveHorizontal) > InputThreshold || Mathf.Abs(moveVertical) > InputThreshold)
+            {
+                // Log the joystick providing the input
+                Debug.Log($"Movement detected on Joystick {joystickNumber}");
+                // Optionally, get and log the name of the joystick
+                string joystickName = GetJoystickName(joystickNumber);
+                Debug.Log($"Joystick {joystickNumber} Name: {joystickName}");
+                break; // Break after detecting input to avoid logging multiple joysticks if there's coincidental simultaneous input
+            }
+        }*/
+        horizontal = Input.GetAxis("Horizontal" + PlayerNumber);
+        vertical = Input.GetAxis("Vertical" + PlayerNumber);
         // Debug.Log(horizontal);
-        if(horizontal < 0.1f && horizontal > -0.1f && vertical < 0.1f && vertical > -0.1f)
+        if (horizontal < 0.1f && horizontal > -0.1f && vertical < 0.1f && vertical > -0.1f)
         {
             // Debug.Log("Stopped");
             IsMoving = false;
@@ -38,9 +61,19 @@ public class CharacterMovement : MonoBehaviour
             animationmanager.IsWalkingTrue();
         }
     }
+
+    string GetJoystickName(int joystickNumber)
+    {
+        string[] joystickNames = Input.GetJoystickNames();
+        if (joystickNumber <= joystickNames.Length && !string.IsNullOrEmpty(joystickNames[joystickNumber - 1]))
+        {
+            return joystickNames[joystickNumber - 1];
+        }
+        return "Unknown";
+    }
     private void FixedUpdate()
     {
-        if (IsMoving)
+        if (IsMoving && !Block.IsBlocking)
         {
             // Vector3 DesiredVelocity = Vector3.right * horizontal * MoveSpeed * vertical * Time.deltaTime;
             Vector3 DesiredVelocity = new Vector3(horizontal * Time.deltaTime * MoveSpeed, rigidbodyFighter.velocity.y, -vertical * MoveSpeed * Time.deltaTime);

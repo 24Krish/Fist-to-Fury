@@ -4,8 +4,41 @@ using UnityEngine;
 
 public class HitDetection : MonoBehaviour
 {
+    public float ForceAmount;
+    public Transform RootTransform;
+    public float Damage;
+    public GameObject HitParticle;
+    private AudioSource HitSound;
+    public GameObject BlockParticle;
+    private BlockDetection Block;
+
+    private void Start()
+    {
+        HitSound = GetComponent<AudioSource>(); 
+    }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
+        if (other.CompareTag("Player"))
+        {
+            HitSound.Play();
+            Block = other.gameObject.GetComponent<BlockDetection>();
+            if (Block.IsBlocking)
+            {
+                Instantiate(BlockParticle, other.ClosestPoint(transform.position), BlockParticle.transform.rotation);
+                other.GetComponent<HPManager>().TakeDamage(Damage/2);
+            }
+
+            else
+            {
+                Instantiate(HitParticle, other.ClosestPoint(transform.position), HitParticle.transform.rotation);
+                other.GetComponent<HPManager>().TakeDamage(Damage);
+                Vector3 direction = other.gameObject.transform.position - RootTransform.position;
+                Rigidbody otherRB = other.gameObject.GetComponent<Rigidbody>();
+                if (otherRB != null)
+                {
+                    otherRB.AddForce(direction.normalized * ForceAmount, ForceMode.Force);
+                }
+            }
+        }
     }
 }

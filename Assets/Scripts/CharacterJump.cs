@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterJump : MonoBehaviour
 {
+    public int PlayerNumber;
     Rigidbody rigidbodyFighter;
     private bool TryingToJump;
     public float JumpForce;
@@ -18,7 +19,7 @@ public class CharacterJump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump_P1"))
+        if (Input.GetButtonDown("Jump_P" + PlayerNumber))
         {
             Debug.Log("Jump_P1");
             TryingToJump = true;
