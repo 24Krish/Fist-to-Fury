@@ -14,4 +14,19 @@ public class PunchHandler : MonoBehaviour
     {
         PunchCollider.enabled = false;
     }
+
+    public void DisableIsBlocking() 
+    {
+        GetComponentInParent<BlockDetection>().IsBlocking = false;
+    }
+
+    public void EnableIsBlocking()
+    {
+        GetComponentInParent<BlockDetection>().IsBlocking = true;
+    }
+
+    public void EnableAllowInput()
+    {
+        GetComponentInParent<BlockDetection>().AllowInput = true;
+    }
 }
