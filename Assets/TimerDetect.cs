@@ -8,6 +8,10 @@ public class TimerDetect : MonoBehaviour
     public TextMeshProUGUI TimerText;
     private float RoundTime = 150f;
     private float CurrentTime;
+    public void ResetRoundTime() 
+    { 
+        CurrentTime = RoundTime + 1;
+    }
     private void UpdateTimeDisplay()
     {
         CurrentTime = Mathf.Max(0, CurrentTime);

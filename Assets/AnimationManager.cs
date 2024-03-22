@@ -21,4 +21,8 @@ public class AnimationManager : MonoBehaviour
     {
         animation.SetTrigger("PunchTrigger");
     }
+    public void Block()
+    {
+        animation.SetTrigger("Block");
+    }
 }

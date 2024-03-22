@@ -12,27 +12,46 @@ public class CombatManager : MonoBehaviour
     public Toggle[] PlayerTwoRoundToggles;
     private int PlayerOneToggleIndex;
     private int PlayerTwoToggleIndex;
-    public void RoundOver(int PlayerNumber)
+    public TimerDetect RoundTime;
+    public GameObject RespawnPoint;
+    public GameObject WinnerPanel;
+    private TextMeshProUGUI WinnerText;
+    public void RoundOver(GameObject Player)
     {
-        if(PlayerNumber == 1)
+        int PlayerNumber = Player.GetComponent<CharacterMovement>().PlayerNumber;
+        Player.GetComponent<HPManager>().FullMaxHP();
+        RoundTime.ResetRoundTime();
+        if(PlayerNumber == 2)
         {
             PlayerOneRoundToggles[PlayerOneToggleIndex].isOn = true;
             PlayerOneToggleIndex++;
+            if(PlayerOneToggleIndex >= 2)
+            {
+                WinnerPanel.SetActive(true);
+                WinnerText.SetText("Player 1 Wins");
+            }
         }
 
         else
         {
             PlayerTwoRoundToggles[PlayerTwoToggleIndex].isOn = true; 
             PlayerTwoToggleIndex++;
+            if (PlayerTwoToggleIndex >= 2)
+            {
+                WinnerPanel.SetActive(true);
+                WinnerText.SetText("Player 2 Wins");
+            }
         }
 
         CurrentRound++;
         RoundText.SetText("Round " + CurrentRound);
+        Player.transform.position = RespawnPoint.transform.position;
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        WinnerText = WinnerPanel.GetComponentInChildren<TextMeshProUGUI>();  
+        WinnerPanel.SetActive(false);
     }
 
     // Update is called once per frame

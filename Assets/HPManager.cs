@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,12 @@ public class HPManager : MonoBehaviour
     private float CurrentHealth;
     public Image HPImage;
     private CharacterMovement Move;
+    public CombatManager combatManager;
+    public void FullMaxHP()
+    {
+        CurrentHealth = StartingHealth;
+        HPImage.fillAmount = 1;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +34,11 @@ public class HPManager : MonoBehaviour
         StartCoroutine(DisableMovement());
         CurrentHealth -= Damage;
         HPImage.fillAmount = Mathf.Clamp01(CurrentHealth);
-        Debug.Log(CurrentHealth);
+        if(CurrentHealth <= 0)
+        {
+            combatManager.RoundOver(gameObject);
+        }
+        
     }
 
     private IEnumerator DisableMovement()
@@ -35,5 +46,12 @@ public class HPManager : MonoBehaviour
         Move.enabled = false;
         yield return new WaitForSeconds(0.1f);
         Move.enabled = true;
+    }
+
+    public void HandledSmallHealth()
+    {
+        CurrentHealth += 0.25f;
+        CurrentHealth = Mathf.Clamp01(CurrentHealth);
+        HPImage.fillAmount = CurrentHealth;
     }
 }
