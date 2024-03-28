@@ -20,6 +20,16 @@ public class CharacterAttack : MonoBehaviour
         if (Input.GetAxis($"P{PlayerNumber}A") >= 0.1f && !Block.IsBlocking)
         {
             animationmanager.Punch();
-        }   
+        }
+        
+        else if(Input.GetButtonDown($"P{PlayerNumber}K") && !Block.IsBlocking)
+        {
+            animationmanager.Kick();
+        }
+
+        else if(Input.GetButtonDown($"P{PlayerNumber}T") && !Block.IsBlocking)
+        {
+            animationmanager.Throw();
+        }
     }
 }

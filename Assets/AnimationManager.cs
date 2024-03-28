@@ -24,5 +24,17 @@ public class AnimationManager : MonoBehaviour
     public void Block()
     {
         animation.SetTrigger("Block");
+
+    }
+
+    public void Kick()
+    {
+        animation.SetTrigger("KickTrigger");
+
+    }
+
+    public void Throw()
+    {
+        animation.SetTrigger("ThrowTrigger");
     }
 }
