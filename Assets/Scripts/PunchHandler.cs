@@ -5,6 +5,9 @@ using UnityEngine;
 public class PunchHandler : MonoBehaviour
 {
     public SphereCollider PunchCollider;
+    public SphereCollider KickCollider;
+    public GameObject ProjectilePrefab;
+    public Transform handTransform;
     public void EnablePunchCollider()
     {
         PunchCollider.enabled = true; 
@@ -28,5 +31,20 @@ public class PunchHandler : MonoBehaviour
     public void EnableAllowInput()
     {
         GetComponentInParent<BlockDetection>().AllowInput = true;
+    }
+
+    public void EnableKickCollider()
+    {
+        KickCollider.enabled = true;
+    }
+
+    public void DisableKickCollider()
+    {
+        KickCollider.enabled = false;
+    }
+
+    public void HandleThrowEvent()
+    {
+        Instantiate(ProjectilePrefab, handTransform.position, transform.parent.transform.rotation);
     }
 }
