@@ -7,7 +7,15 @@ using UnityEngine.UI;
 public class CombatManager : MonoBehaviour
 {
     private int CurrentRound = 1;
+    public GameObject[] AvailibilityFighter;
+    public Transform PlayerOneStartingPoint;
+    public Transform PlayerTwoStartingPoint;
+    private int CurrentPlayerSelecting = 1;
+    private GameObject PlayerOneSelectingFighter;
+    private GameObject PlayerTwoSelectingFighter;
+    public GameObject MainMenuCanvas;
     public TextMeshProUGUI RoundText;
+    public TextMeshProUGUI CurrentPlayerSelectingText;
     public Toggle[] PlayerOneRoundToggles;
     public Toggle[] PlayerTwoRoundToggles;
     private int PlayerOneToggleIndex;
@@ -16,6 +24,36 @@ public class CombatManager : MonoBehaviour
     public GameObject RespawnPoint;
     public GameObject WinnerPanel;
     private TextMeshProUGUI WinnerText;
+    public void HandleSelectFighter(int FighterNumber) 
+    {
+        GameObject SelectedFighter = null;
+       if (FighterNumber == 0)
+        {
+            SelectedFighter = AvailibilityFighter[0];
+        }
+       else if (FighterNumber == 1)
+        {
+             SelectedFighter = AvailibilityFighter[1];
+        }
+        else if (FighterNumber == 2)
+        {
+            SelectedFighter = AvailibilityFighter[2];
+        }
+        if(CurrentPlayerSelecting == 1)
+        {
+            PlayerOneSelectingFighter = SelectedFighter;
+            PlayerOneSelectingFighter.transform.position = PlayerOneStartingPoint.position;
+            CurrentPlayerSelecting++;
+            CurrentPlayerSelectingText.SetText("Player 2 Choose Fighter"); 
+        }
+        else if(CurrentPlayerSelecting == 2)
+        {
+            PlayerTwoSelectingFighter = SelectedFighter;
+            PlayerTwoSelectingFighter.transform.position = PlayerTwoStartingPoint.position;
+            MainMenuCanvas.SetActive(false);
+        }
+    }
+    
     public void RoundOver(GameObject Player)
     {
         int PlayerNumber = Player.GetComponent<CharacterMovement>().PlayerNumber;
