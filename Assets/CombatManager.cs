@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,6 +7,7 @@ using UnityEngine.UI;
 
 public class CombatManager : MonoBehaviour
 {
+    public CinemachineTargetGroup TargetGroup;
     private int CurrentRound = 1;
     public GameObject[] AvailibilityFighter;
     public Transform PlayerOneStartingPoint;
@@ -42,15 +44,20 @@ public class CombatManager : MonoBehaviour
         if(CurrentPlayerSelecting == 1)
         {
             PlayerOneSelectingFighter = SelectedFighter;
+            PlayerOneSelectingFighter.SetActive(true);
             PlayerOneSelectingFighter.transform.position = PlayerOneStartingPoint.position;
             CurrentPlayerSelecting++;
-            CurrentPlayerSelectingText.SetText("Player 2 Choose Fighter"); 
+            CurrentPlayerSelectingText.SetText("Player 2 Choose Fighter");
+            TargetGroup.AddMember(PlayerOneSelectingFighter.transform, 1f, 0.5f);
         }
         else if(CurrentPlayerSelecting == 2)
         {
             PlayerTwoSelectingFighter = SelectedFighter;
+            PlayerTwoSelectingFighter.SetActive(true);
             PlayerTwoSelectingFighter.transform.position = PlayerTwoStartingPoint.position;
             MainMenuCanvas.SetActive(false);
+            RoundTime.ShouldRun = true;
+            TargetGroup.AddMember(PlayerTwoSelectingFighter.transform, 1f, 0.5f);
         }
     }
     
@@ -90,6 +97,7 @@ public class CombatManager : MonoBehaviour
     {
         WinnerText = WinnerPanel.GetComponentInChildren<TextMeshProUGUI>();  
         WinnerPanel.SetActive(false);
+        TargetGroup.m_Targets = new CinemachineTargetGroup.Target[0];
     }
 
     // Update is called once per frame

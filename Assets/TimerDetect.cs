@@ -8,6 +8,7 @@ public class TimerDetect : MonoBehaviour
     public TextMeshProUGUI TimerText;
     private float RoundTime = 150f;
     private float CurrentTime;
+    public bool ShouldRun = false;
     public void ResetRoundTime() 
     { 
         CurrentTime = RoundTime + 1;
@@ -29,7 +30,10 @@ public class TimerDetect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CurrentTime -= Time.deltaTime;
-        UpdateTimeDisplay();
+        if (ShouldRun)
+        {
+            CurrentTime -= Time.deltaTime;
+            UpdateTimeDisplay();
+        }
     }
 }
