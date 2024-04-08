@@ -12,7 +12,7 @@ public class CharacterMovement : MonoBehaviour
     private float vertical;
     private float InputThreshold = 0.1f;
     private AnimationManager animationmanager;
-    public int PlayerNumber;
+    private PlayerNumber playerNumber;
     private BlockDetection Block;
     // Start is called before the first frame update
     void Start()
@@ -20,6 +20,7 @@ public class CharacterMovement : MonoBehaviour
         animationmanager = GetComponent<AnimationManager>();    
          rigidbodyFighter = GetComponent<Rigidbody>();
         Block = GetComponent<BlockDetection>();
+        playerNumber = GetComponent<PlayerNumber>();
     }
 
     // Update is called once per frame
@@ -44,8 +45,8 @@ public class CharacterMovement : MonoBehaviour
                 break; // Break after detecting input to avoid logging multiple joysticks if there's coincidental simultaneous input
             }
         }*/
-        horizontal = Input.GetAxis("Horizontal" + PlayerNumber);
-        vertical = Input.GetAxis("Vertical" + PlayerNumber);
+        horizontal = Input.GetAxis("Horizontal" + playerNumber.AssignedPlayerNumber);
+        vertical = Input.GetAxis("Vertical" + playerNumber.AssignedPlayerNumber);
         // Debug.Log(horizontal);
         if (horizontal < 0.1f && horizontal > -0.1f && vertical < 0.1f && vertical > -0.1f)
         {

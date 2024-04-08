@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PunchHandler : MonoBehaviour
@@ -8,6 +9,7 @@ public class PunchHandler : MonoBehaviour
     public SphereCollider KickCollider;
     public GameObject ProjectilePrefab;
     public Transform handTransform;
+    private PlayerNumber playerNumber;
     public void EnablePunchCollider()
     {
         PunchCollider.enabled = true; 
@@ -45,6 +47,12 @@ public class PunchHandler : MonoBehaviour
 
     public void HandleThrowEvent()
     {
-        Instantiate(ProjectilePrefab, handTransform.position, transform.parent.transform.rotation);
+        GameObject SpawnedProjectile = Instantiate(ProjectilePrefab, handTransform.position, transform.parent.transform.rotation);
+        SpawnedProjectile.GetComponent<ProjectileDamage>().playerNumber = playerNumber.AssignedPlayerNumber;
+    }
+
+    private void Start()
+    {
+        playerNumber = GetComponentInParent<PlayerNumber>();
     }
 }

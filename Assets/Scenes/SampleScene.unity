@@ -355,7 +355,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8ebc4f8ab47e7468b7a727af02e3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 2
   JumpForce: 5
 --- !u!114 &96157462
 MonoBehaviour:
@@ -370,7 +369,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 100
-  PlayerNumber: 2
 --- !u!136 &96157463
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -434,7 +432,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingHealth: 1
-  HPImage: {fileID: 1085256923}
+  PlayerOneHpImage: {fileID: 0}
+  PlayerTwoHpImage: {fileID: 0}
   combatManager: {fileID: 1050842684}
 --- !u!114 &96157468
 MonoBehaviour:
@@ -448,7 +447,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11ee06b9294965c4690319224e4bbdfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 2
 --- !u!114 &96157469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,6 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0fbf35a8d26bf4c9e8e7adc1d30944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UltimateAttackDuration: 0
   animation: {fileID: 1265592124}
 --- !u!114 &96157470
 MonoBehaviour:
@@ -474,7 +473,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2503a3d54fdbd1a40a2d6dc21ec60398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 2
   IsBlocking: 0
   AllowInput: 1
 --- !u!114 &96157471
@@ -772,7 +770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2503a3d54fdbd1a40a2d6dc21ec60398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 2
   IsBlocking: 0
   AllowInput: 1
 --- !u!114 &145599445
@@ -787,6 +784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0fbf35a8d26bf4c9e8e7adc1d30944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UltimateAttackDuration: 2
   animation: {fileID: 1228489541}
 --- !u!114 &145599446
 MonoBehaviour:
@@ -800,7 +798,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11ee06b9294965c4690319224e4bbdfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 2
 --- !u!114 &145599447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -814,7 +811,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingHealth: 1
-  HPImage: {fileID: 1085256923}
+  PlayerOneHpImage: {fileID: 1040582983}
+  PlayerTwoHpImage: {fileID: 1085256923}
   combatManager: {fileID: 1050842684}
 --- !u!114 &145599448
 MonoBehaviour:
@@ -828,7 +826,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8ebc4f8ab47e7468b7a727af02e3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 2
   JumpForce: 5
 --- !u!114 &145599449
 MonoBehaviour:
@@ -843,7 +840,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 100
-  PlayerNumber: 2
 --- !u!136 &145599450
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -899,6 +895,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: fbf89d03afc7fb848af45a6cf9c83d98, type: 3}
   m_PrefabInstance: {fileID: 629374291}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &145599454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145599442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80eb8e15dcac00f40908ef029c061977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AssignedPlayerNumber: 0
 --- !u!1 &168867146 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100112, guid: 5c1b4e21ca0489847a9faa7c027ac564, type: 3}
@@ -1378,7 +1387,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 100
-  PlayerNumber: 1
 --- !u!114 &488918205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1391,7 +1399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8ebc4f8ab47e7468b7a727af02e3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 1
   JumpForce: 5
 --- !u!1 &499953646 stripped
 GameObject:
@@ -1660,6 +1667,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: fbf89d03afc7fb848af45a6cf9c83d98, type: 3}
       insertIndex: -1
       addedObject: {fileID: 145599443}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: fbf89d03afc7fb848af45a6cf9c83d98, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 145599454}
     - targetCorrespondingSourceObject: {fileID: 177074, guid: fbf89d03afc7fb848af45a6cf9c83d98, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1228489542}
@@ -2000,6 +2010,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 7b6c7c63327b0a8498e822b1e8412600, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1349476202}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 7b6c7c63327b0a8498e822b1e8412600, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1349476213}
     - targetCorrespondingSourceObject: {fileID: 100114, guid: 7b6c7c63327b0a8498e822b1e8412600, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1903124579}
@@ -4076,7 +4089,7 @@ GameObject:
   - component: {fileID: 1040582984}
   - component: {fileID: 1040582983}
   m_Layer: 5
-  m_Name: BackGround
+  m_Name: P1 HP BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4406,7 +4419,7 @@ GameObject:
   - component: {fileID: 1085256924}
   - component: {fileID: 1085256923}
   m_Layer: 5
-  m_Name: BackGround
+  m_Name: P2 HP BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5626,7 +5639,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2503a3d54fdbd1a40a2d6dc21ec60398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 2
   IsBlocking: 0
   AllowInput: 1
 --- !u!114 &1349476204
@@ -5642,7 +5654,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingHealth: 1
-  HPImage: {fileID: 1040582983}
+  PlayerOneHpImage: {fileID: 1040582983}
+  PlayerTwoHpImage: {fileID: 1085256923}
   combatManager: {fileID: 1050842684}
 --- !u!114 &1349476205
 MonoBehaviour:
@@ -5656,7 +5669,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11ee06b9294965c4690319224e4bbdfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 2
 --- !u!114 &1349476206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5669,6 +5681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0fbf35a8d26bf4c9e8e7adc1d30944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UltimateAttackDuration: 2
   animation: {fileID: 1903124578}
 --- !u!114 &1349476207
 MonoBehaviour:
@@ -5682,7 +5695,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8ebc4f8ab47e7468b7a727af02e3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 2
   JumpForce: 5
 --- !u!114 &1349476208
 MonoBehaviour:
@@ -5697,7 +5709,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 100
-  PlayerNumber: 2
 --- !u!136 &1349476209
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5753,6 +5764,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 7b6c7c63327b0a8498e822b1e8412600, type: 3}
   m_PrefabInstance: {fileID: 662292644}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1349476213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349476201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80eb8e15dcac00f40908ef029c061977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AssignedPlayerNumber: 0
 --- !u!1 &1385855900
 GameObject:
   m_ObjectHideFlags: 0
@@ -7624,6 +7648,7 @@ GameObject:
   - component: {fileID: 1451523004}
   - component: {fileID: 1451523006}
   - component: {fileID: 1451523008}
+  - component: {fileID: 1451523010}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -7643,6 +7668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0fbf35a8d26bf4c9e8e7adc1d30944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UltimateAttackDuration: 2
   animation: {fileID: 1444218999}
 --- !u!1 &1451523001
 GameObject:
@@ -7672,7 +7698,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11ee06b9294965c4690319224e4bbdfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 1
 --- !u!1 &1451523003
 GameObject:
   m_ObjectHideFlags: 0
@@ -7702,7 +7727,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingHealth: 1
-  HPImage: {fileID: 1040582983}
+  PlayerOneHpImage: {fileID: 1040582983}
+  PlayerTwoHpImage: {fileID: 1085256923}
   combatManager: {fileID: 1050842684}
 --- !u!1 &1451523005
 GameObject:
@@ -7732,7 +7758,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2503a3d54fdbd1a40a2d6dc21ec60398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 1
   IsBlocking: 0
   AllowInput: 1
 --- !u!1 &1451523007
@@ -7781,6 +7806,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1451523010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451522999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80eb8e15dcac00f40908ef029c061977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AssignedPlayerNumber: 0
 --- !u!1 &1451523011
 GameObject:
   m_ObjectHideFlags: 0

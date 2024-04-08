@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class AnimationManager : MonoBehaviour
 {
+    public float UltimateAttackDuration;
+    private float CurrentUltimateAttackDuration;
     public Animator animation;
+    private bool IsInUltimateAttack;
 
     public void IsWalkingTrue()
     {
@@ -36,5 +39,24 @@ public class AnimationManager : MonoBehaviour
     public void Throw()
     {
         animation.SetTrigger("ThrowTrigger");
+    }
+
+    public void UltimateAttack()
+    {
+        animation.SetBool("UltimateAttack", true);
+        IsInUltimateAttack = true;
+        CurrentUltimateAttackDuration = UltimateAttackDuration;
+    }
+    private void Update()
+    {
+        if (IsInUltimateAttack)
+        {
+            CurrentUltimateAttackDuration -= Time.deltaTime;
+            if (CurrentUltimateAttackDuration <= 0)
+            {
+                animation.SetBool("UltimateAttack", false);
+                IsInUltimateAttack = false;
+            }
+        }
     }
 }

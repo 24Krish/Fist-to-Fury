@@ -5,31 +5,37 @@ using UnityEngine;
 public class CharacterAttack : MonoBehaviour
 {
     private AnimationManager animationmanager;
-    public int PlayerNumber;
+    private PlayerNumber playerNumber;
     private BlockDetection Block;
     // Start is called before the first frame update
     void Start()
     {
         animationmanager = GetComponent<AnimationManager>();
         Block = GetComponent<BlockDetection>();
+        playerNumber = GetComponent<PlayerNumber>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis($"P{PlayerNumber}A") >= 0.1f && !Block.IsBlocking)
+        if (Input.GetAxis($"P{playerNumber.AssignedPlayerNumber}A") >= 0.1f && !Block.IsBlocking)
         {
             animationmanager.Punch();
         }
         
-        else if(Input.GetButtonDown($"P{PlayerNumber}K") && !Block.IsBlocking)
+        else if(Input.GetButtonDown($"P{playerNumber.AssignedPlayerNumber}K") && !Block.IsBlocking)
         {
             animationmanager.Kick();
         }
 
-        else if(Input.GetButtonDown($"P{PlayerNumber}T") && !Block.IsBlocking)
+        else if(Input.GetButtonDown($"P{playerNumber.AssignedPlayerNumber}T") && !Block.IsBlocking)
         {
             animationmanager.Throw();
+        }
+
+        else if (Input.GetButtonDown($"P{playerNumber.AssignedPlayerNumber}U") && !Block.IsBlocking)
+        {
+            animationmanager.UltimateAttack();
         }
     }
 }

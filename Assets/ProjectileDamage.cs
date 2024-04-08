@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ProjectileDamage : MonoBehaviour
 {
-    public int PlayerNumber;
+    public int playerNumber;
     public float damage;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            int hitPlayerNumber = other.GetComponent<CharacterMovement>().PlayerNumber;
-            if (hitPlayerNumber != PlayerNumber)
+            int hitPlayerNumber = other.GetComponent<PlayerNumber>().AssignedPlayerNumber;
+            if (hitPlayerNumber != playerNumber)
             {
                 other.GetComponent<HPManager>().TakeDamage(damage);
                 Destroy(gameObject);

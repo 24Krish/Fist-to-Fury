@@ -8,19 +8,29 @@ public class HPManager : MonoBehaviour
 {
     public float StartingHealth;
     private float CurrentHealth;
-    public Image HPImage;
+    public Image PlayerOneHpImage;
+    public Image PlayerTwoHpImage;
+    private PlayerNumber playerNumber;
     private CharacterMovement Move;
     public CombatManager combatManager;
     public void FullMaxHP()
     {
         CurrentHealth = StartingHealth;
-        HPImage.fillAmount = 1;
+        if (playerNumber.AssignedPlayerNumber == 1)
+        {
+            PlayerOneHpImage.fillAmount = 1;
+        }
+        else
+        {
+            PlayerTwoHpImage.fillAmount = 1;
+        }
     }
     // Start is called before the first frame update
     void Start()
     {
         CurrentHealth = StartingHealth;
         Move = GetComponent <CharacterMovement>();
+        playerNumber = GetComponent<PlayerNumber>();
     }
 
     // Update is called once per frame
@@ -33,7 +43,14 @@ public class HPManager : MonoBehaviour
     {
         StartCoroutine(DisableMovement());
         CurrentHealth -= Damage;
-        HPImage.fillAmount = Mathf.Clamp01(CurrentHealth);
+        if (playerNumber.AssignedPlayerNumber == 1)
+        {
+            PlayerOneHpImage.fillAmount = Mathf.Clamp01(CurrentHealth); 
+        }
+        else
+        {
+            PlayerTwoHpImage.fillAmount = Mathf.Clamp01(CurrentHealth);
+        }
         if(CurrentHealth <= 0)
         {
             combatManager.RoundOver(gameObject);
@@ -52,6 +69,13 @@ public class HPManager : MonoBehaviour
     {
         CurrentHealth += 0.25f;
         CurrentHealth = Mathf.Clamp01(CurrentHealth);
-        HPImage.fillAmount = CurrentHealth;
+        if (playerNumber.AssignedPlayerNumber == 1)
+        {
+            PlayerOneHpImage.fillAmount = CurrentHealth;
+        }
+        else
+        {
+            PlayerTwoHpImage.fillAmount = CurrentHealth;
+        }
     }
 }

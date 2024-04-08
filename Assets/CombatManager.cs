@@ -46,6 +46,7 @@ public class CombatManager : MonoBehaviour
             PlayerOneSelectingFighter = SelectedFighter;
             PlayerOneSelectingFighter.SetActive(true);
             PlayerOneSelectingFighter.transform.position = PlayerOneStartingPoint.position;
+            PlayerOneSelectingFighter.GetComponent<PlayerNumber>().AssignedPlayerNumber = CurrentPlayerSelecting;
             CurrentPlayerSelecting++;
             CurrentPlayerSelectingText.SetText("Player 2 Choose Fighter");
             TargetGroup.AddMember(PlayerOneSelectingFighter.transform, 1f, 0.5f);
@@ -58,12 +59,13 @@ public class CombatManager : MonoBehaviour
             MainMenuCanvas.SetActive(false);
             RoundTime.ShouldRun = true;
             TargetGroup.AddMember(PlayerTwoSelectingFighter.transform, 1f, 0.5f);
+            PlayerTwoSelectingFighter.GetComponent<PlayerNumber>().AssignedPlayerNumber = CurrentPlayerSelecting;
         }
     }
     
     public void RoundOver(GameObject Player)
     {
-        int PlayerNumber = Player.GetComponent<CharacterMovement>().PlayerNumber;
+        int PlayerNumber = Player.GetComponent<PlayerNumber>().AssignedPlayerNumber;
         Player.GetComponent<HPManager>().FullMaxHP();
         RoundTime.ResetRoundTime();
         if(PlayerNumber == 2)
