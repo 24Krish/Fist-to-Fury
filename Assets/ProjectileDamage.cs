@@ -6,6 +6,8 @@ public class ProjectileDamage : MonoBehaviour
 {
     public int playerNumber;
     public float damage;
+    public Transform RootTransform;
+    public float ForceAmount;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -14,6 +16,12 @@ public class ProjectileDamage : MonoBehaviour
             if (hitPlayerNumber != playerNumber)
             {
                 other.GetComponent<HPManager>().TakeDamage(damage);
+                Vector3 direction = other.gameObject.transform.position - RootTransform.position;
+                Rigidbody otherRB = other.gameObject.GetComponent<Rigidbody>();
+                if (otherRB != null)
+                {
+                    otherRB.AddForce(direction.normalized * ForceAmount, ForceMode.Force);
+                }
                 Destroy(gameObject);
             }
         }

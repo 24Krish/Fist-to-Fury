@@ -19843,8 +19843,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0916adb7c0d250e41888bc087178b4bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNumber: 2
+  playerNumber: 0
   damage: 0.33
+  RootTransform: {fileID: 0}
+  ForceAmount: 500
 --- !u!1 &7252391338613181153
 GameObject:
   m_ObjectHideFlags: 0

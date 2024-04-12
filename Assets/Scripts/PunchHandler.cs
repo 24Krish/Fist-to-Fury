@@ -10,6 +10,7 @@ public class PunchHandler : MonoBehaviour
     public GameObject ProjectilePrefab;
     public Transform handTransform;
     private PlayerNumber playerNumber;
+    public SphereCollider LeftFootCollider;
     public void EnablePunchCollider()
     {
         PunchCollider.enabled = true; 
@@ -49,10 +50,20 @@ public class PunchHandler : MonoBehaviour
     {
         GameObject SpawnedProjectile = Instantiate(ProjectilePrefab, handTransform.position, transform.parent.transform.rotation);
         SpawnedProjectile.GetComponent<ProjectileDamage>().playerNumber = playerNumber.AssignedPlayerNumber;
+        SpawnedProjectile.GetComponent<ProjectileDamage>().RootTransform = transform.parent.transform;
     }
 
     private void Start()
     {
         playerNumber = GetComponentInParent<PlayerNumber>();
+    }
+    public void EnableLeftFootCollider()
+    {
+        LeftFootCollider.enabled = true;
+    }
+
+    public void DisableLeftFootCollider()
+    {
+        LeftFootCollider.enabled = false;
     }
 }

@@ -18,6 +18,10 @@ public class BlockDetection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (CombatManager.IsGameOver)
+        {
+            return;
+        }
         if (Input.GetAxis($"Player {playerNumber.AssignedPlayerNumber} Block") >= 0.1f && AllowInput)
         {
             animationManager.Block();

@@ -26,25 +26,10 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Check each joystick axis for input
-        /*for (int joystickNumber = 1; joystickNumber <= 1; joystickNumber++) // Assuming up to 4 joysticks for simplicity
+        if (CombatManager.IsGameOver)
         {
-            string horizontalAxisName = "Horizontal" + joystickNumber; // Your axis names might differ
-            string verticalAxisName = "Vertical" + joystickNumber; // Your axis names might differ
-
-            float moveHorizontal = Input.GetAxis(horizontalAxisName);
-            float moveVertical = Input.GetAxis(verticalAxisName);
-
-            if (Mathf.Abs(moveHorizontal) > InputThreshold || Mathf.Abs(moveVertical) > InputThreshold)
-            {
-                // Log the joystick providing the input
-                Debug.Log($"Movement detected on Joystick {joystickNumber}");
-                // Optionally, get and log the name of the joystick
-                string joystickName = GetJoystickName(joystickNumber);
-                Debug.Log($"Joystick {joystickNumber} Name: {joystickName}");
-                break; // Break after detecting input to avoid logging multiple joysticks if there's coincidental simultaneous input
-            }
-        }*/
+            return;
+        }
         horizontal = Input.GetAxis("Horizontal" + playerNumber.AssignedPlayerNumber);
         vertical = Input.GetAxis("Vertical" + playerNumber.AssignedPlayerNumber);
         // Debug.Log(horizontal);

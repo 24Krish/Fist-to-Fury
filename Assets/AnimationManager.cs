@@ -9,6 +9,7 @@ public class AnimationManager : MonoBehaviour
     private float CurrentUltimateAttackDuration;
     public Animator animation;
     private bool IsInUltimateAttack;
+    public PunchHandler punchHandler;
 
     public void IsWalkingTrue()
     {
@@ -46,6 +47,11 @@ public class AnimationManager : MonoBehaviour
         animation.SetBool("UltimateAttack", true);
         IsInUltimateAttack = true;
         CurrentUltimateAttackDuration = UltimateAttackDuration;
+        punchHandler.EnableLeftFootCollider();
+    }
+    public void VictoryEmote()
+    {
+        animation.SetTrigger("VictoryTrigger");
     }
     private void Update()
     {
@@ -56,6 +62,7 @@ public class AnimationManager : MonoBehaviour
             {
                 animation.SetBool("UltimateAttack", false);
                 IsInUltimateAttack = false;
+                punchHandler.DisableLeftFootCollider();
             }
         }
     }

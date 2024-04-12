@@ -20,6 +20,10 @@ public class CharacterJump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (CombatManager.IsGameOver)
+        {
+            return;
+        }
         if (Input.GetButtonDown("Jump_P" + playerNumber.AssignedPlayerNumber))
         {
             Debug.Log("Jump_P1");

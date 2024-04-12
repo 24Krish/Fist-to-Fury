@@ -30,6 +30,10 @@ public class TimerDetect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (CombatManager.IsGameOver)
+        {
+            return;
+        }
         if (ShouldRun)
         {
             CurrentTime -= Time.deltaTime;

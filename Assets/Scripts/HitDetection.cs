@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HitDetection : MonoBehaviour
 {
@@ -12,10 +13,12 @@ public class HitDetection : MonoBehaviour
     public GameObject BlockParticle;
     private BlockDetection Block;
     public PowerUpManager powerUpManager;
+    public Image PowerUpImage;
+    public float ImageChangeAmount;
 
     private void Start()
     {
-        HitSound = GetComponent<AudioSource>(); 
+        HitSound = GetComponent<AudioSource>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -23,6 +26,7 @@ public class HitDetection : MonoBehaviour
         {
             HitSound.Play();
             Block = other.gameObject.GetComponent<BlockDetection>();
+            PowerUpImage.fillAmount += ImageChangeAmount;
             if (Block.IsBlocking)
             {
                 Debug.LogWarning("Hit While Blocking " + other.name);
