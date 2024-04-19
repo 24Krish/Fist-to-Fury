@@ -31,6 +31,10 @@ public class CombatManager : MonoBehaviour
     public Image PlayerOnePowerUpImage;
     public Image PlayerTwoPowerUpImage;
     public static bool IsGameOver;
+    public float FireAreaOffTime;
+    public float FireAreaOnTime;
+    private float CurrentFireAreaTimer;
+    public GameObject FireArea;
     public void HandleSelectFighter(int FighterNumber) 
     {
         GameObject SelectedFighter = null;
@@ -156,11 +160,26 @@ public class CombatManager : MonoBehaviour
         TargetGroup.m_Targets = new CinemachineTargetGroup.Target[0];
         PlayerOnePowerUpImage.fillAmount = 0;
         PlayerTwoPowerUpImage.fillAmount = 0;
+        CurrentFireAreaTimer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (MainMenuCanvas.activeSelf)
+        {
+            return;
+        }
+        CurrentFireAreaTimer += Time.deltaTime;
+        if(FireArea.activeSelf && CurrentFireAreaTimer >= FireAreaOnTime)
+        {
+            FireArea.SetActive(false);
+            CurrentFireAreaTimer = 0;
+        }
+        if (!FireArea.activeSelf && CurrentFireAreaTimer >= FireAreaOffTime)
+        {
+            FireArea.SetActive(true);
+            CurrentFireAreaTimer = 0;
+        }
     }
 }
