@@ -8,6 +8,7 @@ public class HPManager : MonoBehaviour
 {
     public float StartingHealth;
     private float CurrentHealth;
+    public float GetCurrentHealth => CurrentHealth;
     public Image PlayerOneHpImage;
     public Image PlayerTwoHpImage;
     private PlayerNumber playerNumber;

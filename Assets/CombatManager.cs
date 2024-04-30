@@ -59,6 +59,7 @@ public class CombatManager : MonoBehaviour
             var characterAttack = PlayerOneSelectingFighter.GetComponent<CharacterAttack>();
             characterAttack.playerPowerUpImage = PlayerOnePowerUpImage; 
             CurrentPlayerSelecting++;
+            RoundTime.Fighter1 = SelectedFighter;
             HitDetection[] hitDetections = SelectedFighter.GetComponentsInChildren<HitDetection>();
             foreach (HitDetection hitDetection in hitDetections)
             {
@@ -74,6 +75,7 @@ public class CombatManager : MonoBehaviour
             PlayerTwoSelectingFighter.SetActive(true);
             var characterAttack = PlayerTwoSelectingFighter.GetComponent<CharacterAttack>();
             characterAttack.playerPowerUpImage = PlayerTwoPowerUpImage;
+            RoundTime.Fighter2 = SelectedFighter;
             PlayerTwoSelectingFighter.transform.position = PlayerTwoStartingPoint.position;
             HitDetection[] hitDetections = SelectedFighter.GetComponentsInChildren<HitDetection>();
             foreach (HitDetection hitDetection in hitDetections)
@@ -145,6 +147,7 @@ public class CombatManager : MonoBehaviour
             Quaternion Rotation = Quaternion.LookRotation(LookPosition);
             PlayerTwoSelectingFighter.transform.rotation = Rotation;
         }
+        Destroy(FireArea);
         IsGameOver = true;
     }
     public void RestartScene()
@@ -166,20 +169,33 @@ public class CombatManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (MainMenuCanvas.activeSelf)
+        if (MainMenuCanvas.activeSelf || IsGameOver)
         {
             return;
         }
         CurrentFireAreaTimer += Time.deltaTime;
-        if(FireArea.activeSelf && CurrentFireAreaTimer >= FireAreaOnTime)
+        if (FireArea != null)
         {
-            FireArea.SetActive(false);
-            CurrentFireAreaTimer = 0;
+
+
+            if (FireArea.activeSelf && CurrentFireAreaTimer >= FireAreaOnTime)
+            {
+                FireArea.SetActive(false);
+                CurrentFireAreaTimer = 0;
+            }
+            if (!FireArea.activeSelf && CurrentFireAreaTimer >= FireAreaOffTime)
+            {
+                FireArea.SetActive(true);
+                CurrentFireAreaTimer = 0;
+            }
         }
-        if (!FireArea.activeSelf && CurrentFireAreaTimer >= FireAreaOffTime)
-        {
-            FireArea.SetActive(true);
-            CurrentFireAreaTimer = 0;
-        }
+    }
+
+    internal void RoundTie()
+    {
+        PlayerOneSelectingFighter.transform.position = PlayerOneStartingPoint.position;
+        PlayerTwoSelectingFighter.transform.position = PlayerTwoStartingPoint.position;
+        PlayerOneSelectingFighter.GetComponent<HPManager>().FullMaxHP();
+        PlayerTwoSelectingFighter.GetComponent<HPManager>().FullMaxHP();
     }
 }

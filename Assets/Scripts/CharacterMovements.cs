@@ -14,6 +14,7 @@ public class CharacterMovement : MonoBehaviour
     private AnimationManager animationmanager;
     private PlayerNumber playerNumber;
     private BlockDetection Block;
+    private Vector3 StartingPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +23,17 @@ public class CharacterMovement : MonoBehaviour
         Block = GetComponent<BlockDetection>();
         playerNumber = GetComponent<PlayerNumber>();
     }
-
+    private void OnEnable()
+    {
+        StartingPosition = transform.position;
+    }
     // Update is called once per frame
     void Update()
     {
         if (CombatManager.IsGameOver)
-        {
+        {   
+            transform.position = StartingPosition;
+            rigidbodyFighter.velocity = Vector3.zero;
             return;
         }
         horizontal = Input.GetAxis("Horizontal" + playerNumber.AssignedPlayerNumber);
